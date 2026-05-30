@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #0F172A;
+  color: #F1F5F9;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #0F172A; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+/* Progress bar gradient */
+.progress-gradient {
+  background: linear-gradient(90deg, #6366F1, #8B5CF6, #F59E0B);
+  transition: width 0.8s ease;
+}
+
+/* Task done strikethrough */
+.task-done span {
+  text-decoration: line-through;
+  opacity: 0.45;
+}
+
+/* Chat bubbles */
+.chat-bubble-user {
+  background: #6366F1;
+  border-radius: 18px 18px 4px 18px;
+}
+.chat-bubble-ai {
+  background: #1E293B;
+  border-radius: 18px 18px 18px 4px;
+  border: 1px solid #334155;
+}
