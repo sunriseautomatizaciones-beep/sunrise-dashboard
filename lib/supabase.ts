@@ -13,7 +13,13 @@ function getSupabase(): SupabaseClient {
 
 export const supabase = new Proxy({} as SupabaseClient, {
   get(_target, prop) {
-    return (getSupabase() as unknown as Record<string, unknown>)[prop as string];
+    const client = getSupabase();
+    const value = (client as unknown as Record<string, unknown>)[prop as string];
+    if (typeof value === 'function') {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+      return (value as Function).bind(client);
+    }
+    return value;
   },
 });
 
@@ -24,6 +30,7 @@ export type Task = {
   category: 'Prospección' | 'Contenido' | 'Ventas' | 'Automatización' | 'Admin';
   done: boolean;
   date: string; // YYYY-MM-DD
+  is_recurring?: boolean;
   created_at: string;
 };
 
@@ -33,6 +40,7 @@ export type Revenue = {
   description: string;
   client: string;
   month: string; // YYYY-MM
+  status?: 'cobrado' | 'pendiente';
   created_at: string;
 };
 

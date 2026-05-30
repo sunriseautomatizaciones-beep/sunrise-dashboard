@@ -97,16 +97,16 @@ export default function PipelinePage() {
   const byStatus = (status: Lead['status']) => leads.filter(l => l.status === status);
 
   return (
-    <div className="p-6 h-full flex flex-col">
+    <div className="px-3 pt-4 pb-2 md:p-6 h-full flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6 flex-shrink-0">
+      <div className="flex items-center justify-between mb-4 flex-shrink-0">
         <div>
-          <h1 className="text-2xl font-bold text-white">🚀 Pipeline</h1>
-          <p className="text-[#64748B] text-sm mt-1">{leads.length} prospectos en total</p>
+          <h1 className="text-xl md:text-2xl font-bold text-white">🚀 Pipeline</h1>
+          <p className="text-[#64748B] text-xs mt-0.5">{leads.length} prospectos</p>
         </div>
         <button
           onClick={() => setShowNewLead(true)}
-          className="px-4 py-2 bg-[#6366F1] hover:bg-[#4F46E5] text-white text-sm font-medium rounded-lg transition-colors"
+          className="px-3 py-2 md:px-4 bg-[#6366F1] hover:bg-[#4F46E5] text-white text-sm font-medium rounded-xl transition-colors"
         >
           + Nuevo lead
         </button>
@@ -118,7 +118,7 @@ export default function PipelinePage() {
           {COLUMNS.map(col => {
             const colLeads = byStatus(col.id);
             return (
-              <div key={col.id} className="flex-shrink-0 w-56">
+              <div key={col.id} className="flex-shrink-0 w-44 md:w-56">
                 {/* Column header */}
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-xs font-semibold text-[#94A3B8]">{col.label}</span>
@@ -190,8 +190,8 @@ export default function PipelinePage() {
 
       {/* New lead modal */}
       {showNewLead && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-[#1E293B] rounded-2xl p-6 w-full max-w-md border border-[#334155]">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center">
+          <div className="bg-[#1E293B] rounded-t-2xl sm:rounded-2xl p-5 w-full sm:max-w-md border border-[#334155] sm:m-4">
             <h3 className="text-lg font-bold text-white mb-5">Nuevo lead</h3>
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
@@ -201,7 +201,7 @@ export default function PipelinePage() {
                     value={form.name}
                     onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
                     placeholder="Carlos García"
-                    className="w-full bg-[#0F172A] border border-[#334155] rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-[#6366F1]"
+                    className="w-full bg-[#0F172A] border border-[#334155] rounded-xl px-3 py-3 text-white text-base focus:outline-none focus:border-[#6366F1]"
                   />
                 </div>
                 <div>
@@ -210,17 +210,17 @@ export default function PipelinePage() {
                     value={form.company}
                     onChange={e => setForm(p => ({ ...p, company: e.target.value }))}
                     placeholder="Empresa SL"
-                    className="w-full bg-[#0F172A] border border-[#334155] rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-[#6366F1]"
+                    className="w-full bg-[#0F172A] border border-[#334155] rounded-xl px-3 py-3 text-white text-base focus:outline-none focus:border-[#6366F1]"
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="text-xs text-[#64748B] mb-1 block">Canal</label>
                   <select
                     value={form.channel}
                     onChange={e => setForm(p => ({ ...p, channel: e.target.value }))}
-                    className="w-full bg-[#0F172A] border border-[#334155] rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-[#6366F1]"
+                    className="w-full bg-[#0F172A] border border-[#334155] rounded-xl px-3 py-3 text-white text-base focus:outline-none focus:border-[#6366F1]"
                   >
                     {CHANNELS.map(c => <option key={c}>{c}</option>)}
                   </select>
@@ -230,7 +230,7 @@ export default function PipelinePage() {
                   <select
                     value={form.service}
                     onChange={e => setForm(p => ({ ...p, service: e.target.value }))}
-                    className="w-full bg-[#0F172A] border border-[#334155] rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-[#6366F1]"
+                    className="w-full bg-[#0F172A] border border-[#334155] rounded-xl px-3 py-3 text-white text-base focus:outline-none focus:border-[#6366F1]"
                   >
                     {SERVICES.map(s => <option key={s}>{s}</option>)}
                   </select>
@@ -243,21 +243,21 @@ export default function PipelinePage() {
                   onChange={e => setForm(p => ({ ...p, notes: e.target.value }))}
                   rows={2}
                   placeholder="Contexto del lead..."
-                  className="w-full bg-[#0F172A] border border-[#334155] rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-[#6366F1] resize-none"
+                  className="w-full bg-[#0F172A] border border-[#334155] rounded-xl px-3 py-3 text-white text-base focus:outline-none focus:border-[#6366F1] resize-none"
                 />
               </div>
             </div>
-            <div className="flex gap-3 mt-6">
+            <div className="flex gap-3 mt-5">
               <button
                 onClick={() => setShowNewLead(false)}
-                className="flex-1 px-4 py-2.5 border border-[#334155] text-[#94A3B8] text-sm rounded-lg hover:border-[#475569] transition-colors"
+                className="flex-1 px-4 py-3 border border-[#334155] text-[#94A3B8] text-sm rounded-xl"
               >
                 Cancelar
               </button>
               <button
                 onClick={createLead}
                 disabled={saving || !form.name.trim()}
-                className="flex-1 px-4 py-2.5 bg-[#6366F1] hover:bg-[#4F46E5] disabled:opacity-50 text-white text-sm font-medium rounded-lg transition-colors"
+                className="flex-1 px-4 py-3 bg-[#6366F1] hover:bg-[#4F46E5] disabled:opacity-50 text-white text-sm font-semibold rounded-xl transition-colors"
               >
                 {saving ? 'Creando...' : 'Crear lead'}
               </button>
